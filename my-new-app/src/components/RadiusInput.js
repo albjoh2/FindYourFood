@@ -18,7 +18,7 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
         flexDirection: "column",
       }}
     >
-      <span style={{ marginBottom: "10px" }}>Radius: {value} meters</span>
+      <span style={{ marginBottom: "10px" }}>Radius: {value / 1000} km</span>
       <div
         style={{
           display: "flex",
@@ -28,7 +28,7 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
         }}
       >
         <input
-          style={{ position: "absolute", transform: "translateX(50%)" }}
+          style={{ position: "absolute", transform: "translateX(45%)" }}
           type="range"
           name="radius"
           min="400"
@@ -38,7 +38,14 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
           onChange={handleChange}
         />
         <svg height={260} width={260}>
-          <circle cx="130" cy="130" fill="#050515" r={value / 300} />
+          <circle
+            cx="130"
+            cy="130"
+            stroke="#050515"
+            strokeWidth={2}
+            fillOpacity={0}
+            r={value / 345}
+          />
         </svg>
       </div>
     </div>

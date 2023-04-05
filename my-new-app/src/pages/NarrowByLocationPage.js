@@ -1,25 +1,28 @@
 import axios from "axios";
 import { useState } from "react";
-import PriceInput from "./PriceInput";
-import LocationPermission from "./LocationPermission";
+import RadiusInput from "../components/RadiusInput";
+import LocationPermission from "../components/LocationPermission";
 import { useNavigate } from "react-router-dom";
 
-export default function NarrowByPricePage({ SERVER_URL }) {
-  const DEFAULT_PRICE = 2;
+export default function NarrowByLocationPage({ SERVER_URL }) {
+  const DEFAULT_RADIUS = 20000;
   const navigate = useNavigate();
   const [restaurantData, setRestaurantData] = useState([]);
   const [location, setLocation] = useState("");
-  const [price, setPrice] = useState(DEFAULT_PRICE); // initialize radius state with default value
+  const [radius, setRadius] = useState(DEFAULT_RADIUS); // initialize radius state with default value
 
   function handleSubmit() {
-    search(price);
+    search(radius);
     navigate("/narrow-by-price");
   }
 
-  async function search(price) {
+  async function search(radius) {
     try {
+      console.log(
+        `${SERVER_URL}/search?latitude=${location[0]}&longitude=${location[1]}&radius=${radius}&limit=50`
+      );
       const response = await axios.get(
-        `${SERVER_URL}/search?latitude=${location[0]}&longitude=${location[1]}&radius=${price}&limit=50`
+        `${SERVER_URL}/search?latitude=${location[0]}&longitude=${location[1]}&radius=${radius}&limit=50`
       );
       setRestaurantData(response.data.businesses);
       console.log(restaurantData);
@@ -33,7 +36,10 @@ export default function NarrowByPricePage({ SERVER_URL }) {
     <div>
       <LocationPermission setLocation={setLocation} />
       <form onSubmit={(e) => e.preventDefault()}>
-        <PriceInput onValueChange={setPrice} DEFAULT_PRICE={DEFAULT_PRICE} />{" "}
+        <RadiusInput
+          onValueChange={setRadius}
+          DEFAULT_RADIUS={DEFAULT_RADIUS}
+        />{" "}
         {/* pass a function to onValueChange prop */}
         <div>
           <button onClick={handleSubmit} type="submit">

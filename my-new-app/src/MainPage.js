@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import NarrowByLocationPage from "./NarrowByLocationPage";
-import NarrowByPricePage from "./NarrowByPricePage";
-import Welcome from "./Welcome";
+import NarrowByLocationPage from "./pages/NarrowByLocationPage";
+import NarrowByPricePage from "./pages/NarrowByPricePage";
+import NarrowByCategoryPage from "./pages/NarrowByCategoryPage";
+import Results from "./pages/Results";
+import Welcome from "./pages/Welcome";
 
 const SERVER_URL = "http://localhost:8080";
 
@@ -16,11 +18,12 @@ export default function MainPage() {
             path="/narrow-by-location"
             element={<NarrowByLocationPage SERVER_URL={SERVER_URL} />}
           />
+          <Route path="/narrow-by-price" element={<NarrowByPricePage />} />
           <Route
-            exact
-            path="/narrow-by-price"
-            element={<NarrowByPricePage />}
+            path="/narrow-by-category"
+            element={<NarrowByCategoryPage />}
           />
+          <Route path="/results" element={<Results />} />
         </Routes>
       </BrowserRouter>
     </main>

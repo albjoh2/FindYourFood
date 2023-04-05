@@ -1,28 +1,25 @@
 import axios from "axios";
 import { useState } from "react";
-import RadiusInput from "./RadiusInput";
-import LocationPermission from "./LocationPermission";
+import PriceInput from "../components/PriceInput";
+import LocationPermission from "../components/LocationPermission";
 import { useNavigate } from "react-router-dom";
 
-export default function NarrowByLocationPage({ SERVER_URL }) {
-  const DEFAULT_RADIUS = 20000;
+export default function NarrowByPricePage({ SERVER_URL }) {
+  const DEFAULT_PRICE = 2;
   const navigate = useNavigate();
   const [restaurantData, setRestaurantData] = useState([]);
   const [location, setLocation] = useState("");
-  const [radius, setRadius] = useState(DEFAULT_RADIUS); // initialize radius state with default value
+  const [price, setPrice] = useState(DEFAULT_PRICE); // initialize radius state with default value
 
   function handleSubmit() {
-    search(radius);
-    navigate("/narrow-by-price");
+    search(price);
+    navigate("/narrow-by-category");
   }
 
-  async function search(radius) {
+  async function search(price) {
     try {
-      console.log(
-        `${SERVER_URL}/search?latitude=${location[0]}&longitude=${location[1]}&radius=${radius}&limit=50`
-      );
       const response = await axios.get(
-        `${SERVER_URL}/search?latitude=${location[0]}&longitude=${location[1]}&radius=${radius}&limit=50`
+        `${SERVER_URL}/search?latitude=${location[0]}&longitude=${location[1]}&radius=${price}&limit=50`
       );
       setRestaurantData(response.data.businesses);
       console.log(restaurantData);
@@ -36,10 +33,7 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
     <div>
       <LocationPermission setLocation={setLocation} />
       <form onSubmit={(e) => e.preventDefault()}>
-        <RadiusInput
-          onValueChange={setRadius}
-          DEFAULT_RADIUS={DEFAULT_RADIUS}
-        />{" "}
+        <PriceInput onValueChange={setPrice} DEFAULT_PRICE={DEFAULT_PRICE} />{" "}
         {/* pass a function to onValueChange prop */}
         <div>
           <button onClick={handleSubmit} type="submit">
