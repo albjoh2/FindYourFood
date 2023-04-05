@@ -1,2 +1,2 @@
 # FindYourFood
-React frontend and express server.
+React frontend and express.js server.
