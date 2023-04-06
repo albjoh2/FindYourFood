@@ -18,7 +18,10 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
         flexDirection: "column",
       }}
     >
-      <span style={{ marginBottom: "10px" }}>Radius: {value / 1000} km</span>
+      <span style={{ marginBottom: "10px" }}>
+        You're not looking to go too far, right? How about we keep it within{" "}
+        <b>{value / 1000}</b> kilometers?
+      </span>
       <div
         style={{
           display: "flex",
@@ -41,7 +44,7 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
           <circle
             cx="130"
             cy="130"
-            stroke="#050515"
+            stroke="#eee"
             strokeWidth={2}
             fillOpacity={0}
             r={value / 345}
