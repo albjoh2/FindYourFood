@@ -6,7 +6,7 @@ React frontend and express.js server.
 
 Run `npm install` in both the `client` and `server` directories.
 
-## Running the app
+## Running the app in developmer mode
 
 1. Create a `.env` file with your own API key see `.env.example`.
 2. Update const PORT in server.js to your desired port.
