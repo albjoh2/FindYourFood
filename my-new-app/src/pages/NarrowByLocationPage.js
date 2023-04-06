@@ -14,9 +14,14 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
   const dispatch = useDispatch(); // move the useDispatch hook here
 
   function handleSubmit() {
+    if (!location) {
+      alert("Please allow location permission and try again.");
+      return;
+    }
+
     search(radius)
-      .then((found) => {
-        if (!found) {
+      .then((hasResults) => {
+        if (!hasResults) {
           alert("No results found");
           return;
         }
@@ -28,18 +33,17 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
       });
   }
 
-  function search(radius) {
-    return new Promise((resolve, reject) => {
-      axios
-        .get(
-          `${SERVER_URL}/search?latitude=${location[0]}&longitude=${location[1]}&radius=${radius}&limit=50`
-        )
-        .then((response) => {
-          dispatch(setRestaurants(response.data.businesses)); // use the dispatch function here
-          resolve(!!response.data.businesses); // resolve with a boolean value
-        })
-        .catch(reject);
-    });
+  async function search(radius) {
+    try {
+      const response = await axios.get(
+        `${SERVER_URL}/search?latitude=${location[0]}&longitude=${location[1]}&radius=${radius}&limit=50`
+      );
+      dispatch(setRestaurants(response.data.businesses));
+      return !!response.data.businesses;
+    } catch (error) {
+      console.error(error);
+      throw new Error("An error occurred while searching for restaurants.");
+    }
   }
 
   return (

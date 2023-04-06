@@ -26,7 +26,10 @@ export default function MainPage() {
               path="/narrow-by-category"
               element={<NarrowByCategoryPage />}
             />
-            <Route path="/results" element={<Results />} />
+            <Route
+              path="/results"
+              element={<Results SERVER_URL={SERVER_URL} />}
+            />
           </Routes>
         </BrowserRouter>
       </Provider>

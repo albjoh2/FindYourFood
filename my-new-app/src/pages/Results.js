@@ -1,56 +1,107 @@
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { resetRestaurants } from "../reducer";
 
-export default function Results() {
+export default function Results({ SERVER_URL }) {
   const navigate = useNavigate();
-  const restaurants = useSelector((state) => state.restaurants);
   const dispatch = useDispatch();
 
-  function handleClick() {
-    dispatch(resetRestaurants());
+  const restaurants = useSelector((state) => state.restaurants);
+  const hasRestaurants = Boolean(restaurants && restaurants.length);
+  if (!hasRestaurants) {
     navigate("/");
   }
+  const restaurantId = restaurants[0].id;
 
-  let restaurantDisplay;
+  const [restaurantDetails, setRestaurantDetails] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state variable
 
-  if (restaurants && restaurants.length > 0) {
-    const randomRestaurant =
-      restaurants[Math.floor(Math.random() * restaurants.length)];
+  useEffect(() => {
+    const fetchRestaurantDetails = async () => {
+      const response = await fetch(`${SERVER_URL}/business/${restaurantId}`);
+      const data = await response.json();
+      setRestaurantDetails(data);
+    };
 
-    restaurantDisplay = (
-      <>
-        <p>Okey, i got the perfect match for you. Here it is:</p>
-        <h2>{randomRestaurant.name}</h2>
-        <img
-          className="restaurantImage"
-          src={randomRestaurant.image_url}
-          alt={randomRestaurant.name}
-        />
-        <p>{randomRestaurant.location.address1}</p>
-        <p>{randomRestaurant.location.city}</p>
-        <button onClick={handleClick} type="submit">
-          Try again
-        </button>
-      </>
-    );
-  } else {
-    restaurantDisplay = (
-      <>
-        <p>
-          No restaurant matched your requirements, please try again. Protip:
-          Make the searcharea bigger.
-        </p>
-        <button onClick={handleClick} type="submit">
-          Try again
-        </button>
-      </>
-    );
+    const fetchReviews = async () => {
+      const response = await fetch(`${SERVER_URL}/reviews/${restaurantId}`);
+      const data = await response.json();
+      setReviews(data);
+    };
+
+    Promise.all([fetchRestaurantDetails(), fetchReviews()]) // Use Promise.all to wait for both fetch calls to complete
+      .then(() => setLoading(false))
+      .catch((error) => console.error(error));
+  }, [SERVER_URL, restaurantId]);
+
+  const handleClick = () => {
+    dispatch(resetRestaurants());
+    navigate("/");
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
   }
 
   return (
     <div>
-      <div>{restaurantDisplay}</div>
+      {hasRestaurants ? (
+        <>
+          <p>Okey, i got the perfect match for you. Here it is:</p>
+          <div className="restaurantCard">
+            <img
+              className="restaurantImage"
+              src={restaurants[0].image_url}
+              alt={restaurants[0].name}
+            />
+            <h2>{restaurants[0].name}</h2>
+            <h3>Style:</h3>
+            <p>{restaurants[0].categories[0].title}</p>
+            <h3>Address:</h3>
+            <address>{restaurants[0].location.address1}</address>
+            <address>{restaurants[0].location.zip_code}</address>
+            <address>{restaurants[0].location.city}</address>
+            {restaurantDetails && (
+              <>
+                <h3>Price:</h3>
+                <p>{restaurantDetails.price}</p>
+                <h3>Rating:</h3>
+                <p>{restaurantDetails.rating}/5</p>
+              </>
+            )}
+            {reviews.length > 0 && (
+              <>
+                <h3>Reviews:</h3>
+                {reviews.map((review) => (
+                  <div key={review.id}>
+                    <p>{review.text}</p>
+                    <p>By: {review.user.name}</p>
+                    <p>Rating: {review.rating}</p>
+                  </div>
+                ))}
+              </>
+            )}
+            {restaurantDetails && restaurantDetails.display_phone && (
+              <>
+                <h3>Contact:</h3>
+                <address>{restaurantDetails.display_phone}</address>
+              </>
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <p>
+            No restaurant matched your requirements, please try again. Protip:
+            Make the searcharea bigger.
+          </p>
+        </>
+      )}
+      <button onClick={handleClick} type="submit">
+        Try again
+      </button>
     </div>
   );
 }

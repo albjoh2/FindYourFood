@@ -24,11 +24,18 @@ export default function NarrowByCategoryPage() {
     );
   };
 
-  const handleClick = () => {
-    const filteredRestaurants = restaurants.filter((restaurant) =>
+  const filterRestaurantsByCategory = (restaurants, selectedCategories) => {
+    return restaurants.filter((restaurant) =>
       selectedCategories.some(
         (category) => restaurant.categories[0].title === category
       )
+    );
+  };
+
+  const handleClick = () => {
+    const filteredRestaurants = filterRestaurantsByCategory(
+      restaurants,
+      selectedCategories
     );
     dispatch(setRestaurants(filteredRestaurants));
     navigate("/results");

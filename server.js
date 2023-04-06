@@ -37,6 +37,47 @@ app.get("/search", async (req, res) => {
   }
 });
 
+app.get("/business/:id", async (req, res) => {
+  const apiKey = yelpApiKey;
+  const id = req.params.id;
+
+  try {
+    const response = await fetch(`https://api.yelp.com/v3/businesses/${id}`, {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+app.get("/reviews/:id", async (req, res) => {
+  const apiKey = yelpApiKey;
+  const id = req.params.id;
+
+  try {
+    const response = await fetch(
+      `https://api.yelp.com/v3/businesses/${id}/reviews`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 const PORT = 8080;
 
 app.listen(PORT, () => {
