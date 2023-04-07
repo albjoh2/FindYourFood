@@ -45,17 +45,24 @@ export default function NarrowByCategoryPage() {
     <div>
       <div>
         <p>Pick some keywords that makes your stomach go brrr.</p>
-        {categories.map((category) => (
-          <label key={category}>
-            <input
-              type="checkbox"
-              value={category}
-              onChange={handleCategoryChange}
-              checked={selectedCategories.includes(category)}
-            />
-            {category}
-          </label>
-        ))}
+        <div>
+          <div className={"container"}>
+            <ul className={"tag"}>
+              {categories.map((category) => (
+                <li key={category}>
+                  <input
+                    type="checkbox"
+                    id={category}
+                    value={category}
+                    onChange={handleCategoryChange}
+                    checked={selectedCategories.includes(category)}
+                  />
+                  <label for={category}>{category}</label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
         <button onClick={handleClick} type="submit">
           Find me the perfect restaurant
         </button>

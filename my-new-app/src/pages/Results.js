@@ -9,10 +9,11 @@ export default function Results({ SERVER_URL }) {
 
   const restaurants = useSelector((state) => state.restaurants);
   const hasRestaurants = Boolean(restaurants && restaurants.length);
-  if (!hasRestaurants) {
-    navigate("/");
+  let restaurantId;
+
+  if (hasRestaurants) {
+    restaurantId = restaurants[0].id;
   }
-  const restaurantId = restaurants[0].id;
 
   const [restaurantDetails, setRestaurantDetails] = useState(null);
   const [reviews, setReviews] = useState([]);
