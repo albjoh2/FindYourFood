@@ -50,7 +50,7 @@ export default function Results({ SERVER_URL }) {
     <div>
       {hasRestaurants ? (
         <>
-          <p>Okey, i got the perfect match for you. Here it is:</p>
+          <p>Get ready to dig in... Here's your perfect match!</p>
           <div className="restaurantCard">
             <img
               className="restaurantImage"

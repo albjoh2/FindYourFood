@@ -9,11 +9,8 @@ export default function Welcome() {
 
   return (
     <div>
-      <p>
-        I'll do my very best to find you the perfect restaurant, wherever you
-        are and whatever you want to eat.
-      </p>
-      <button onClick={handleClick}>Find me the perfect restaurant</button>
+      <p>Hungry? Let me find your perfect restaurant, anywhere, any cuisine!</p>
+      <button onClick={handleClick}>Yes!</button>
     </div>
   );
 }
