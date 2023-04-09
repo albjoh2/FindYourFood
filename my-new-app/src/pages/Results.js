@@ -65,12 +65,16 @@ export default function Results({ SERVER_URL }) {
             <address>{restaurants[0].location.zip_code}</address>
             <address>{restaurants[0].location.city}</address>
             {restaurantDetails && (
-              <>
-                <h3>Price:</h3>
-                <p>{restaurantDetails.price}</p>
-                <h3>Rating:</h3>
-                <p>{restaurantDetails.rating}/5</p>
-              </>
+              <div className="card-footer">
+                <div>
+                  <h3>Price:</h3>
+                  <p>{restaurantDetails.price}</p>
+                </div>
+                <div>
+                  <h3>Rating:</h3>
+                  <p>{restaurantDetails.rating}/5</p>
+                </div>
+              </div>
             )}
             {reviews.length > 0 && (
               <>

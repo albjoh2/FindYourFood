@@ -13,10 +13,6 @@
   text-align: center;
 }
 
-main {
-  padding: 10% 20%;
-}
-
 h1 {
   margin-bottom: 50px;
 }
@@ -209,7 +205,8 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 
 .restaurantImage {
-  width: 100%;
+  width: 450px;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -222,4 +219,12 @@ input[type="range"]:focus::-ms-fill-upper {
   padding: 20px;
   border: 1px solid var(--primary-color);
   border-radius: 10px;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
