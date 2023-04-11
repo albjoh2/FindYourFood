@@ -11,16 +11,22 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
   const navigate = useNavigate();
   const [location, setLocation] = useState("");
   const [radius, setRadius] = useState(DEFAULT_RADIUS);
-  const dispatch = useDispatch(); // move the useDispatch hook here
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    e.preventDefault();
+
     if (!location) {
       alert("Please allow location permission and try again.");
       return;
     }
 
+    setIsLoading(true); // set loading state to true
+
     search(radius)
       .then((hasResults) => {
+        setIsLoading(false); // set loading state back to false
         if (!hasResults) {
           alert("No results found");
           return;
@@ -29,6 +35,7 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
       })
       .catch((error) => {
         console.error(error);
+        setIsLoading(false); // set loading state back to false
         // Display an error message or handle specific errors differently
       });
   }
@@ -49,15 +56,14 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
   return (
     <div>
       <LocationPermission setLocation={setLocation} />
-      <form onSubmit={(e) => e.preventDefault()}>
+      <form onSubmit={handleSubmit}>
         <RadiusInput
           onValueChange={setRadius}
           DEFAULT_RADIUS={DEFAULT_RADIUS}
-        />{" "}
-        {/* pass a function to onValueChange prop */}
+        />
         <div>
-          <button onClick={handleSubmit} type="submit">
-            Next step
+          <button disabled={!location || isLoading} type="submit">
+            {isLoading ? "Loading..." : "Next step"}
           </button>
         </div>
       </form>

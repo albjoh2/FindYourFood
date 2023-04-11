@@ -57,7 +57,7 @@ export default function NarrowByCategoryPage() {
                     onChange={handleCategoryChange}
                     checked={selectedCategories.includes(category)}
                   />
-                  <label for={category}>{category}</label>
+                  <label htmlFor={category}>{category}</label>
                 </li>
               ))}
             </ul>
