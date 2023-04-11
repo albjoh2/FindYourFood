@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function getCircleRadius(value) {
-  return value / 345;
+  return value / 385 + 33;
 }
 
 export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
@@ -35,7 +35,7 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
         }}
       >
         <input
-          style={{ position: "absolute", transform: "translateX(45%)" }}
+          style={{ position: "absolute", transform: "translateX(65%)" }}
           type="range"
           name="radius"
           min="400"
@@ -44,10 +44,11 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
           value={value}
           onChange={handleChange}
         />
-        <svg height={260} width={260}>
+        <div className="house">🏠</div>
+        <svg height={280} width={280}>
           <circle
-            cx="130"
-            cy="130"
+            cx="140"
+            cy="140"
             stroke="#eee"
             strokeWidth={2}
             fillOpacity={0}

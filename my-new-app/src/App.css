@@ -123,6 +123,7 @@ input[type="range"] {
   background-color: var(--whites);
   -webkit-appearance: none;
   margin: 50px 0;
+  z-index: 1;
 }
 
 input[type="range"]:focus {
@@ -227,4 +228,13 @@ input[type="range"]:focus::-ms-fill-upper {
   justify-content: space-around;
   align-items: center;
   width: 100%;
+}
+
+.house {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  font-size: 3rem;
+  transform: translate(-25%, -60%);
+  z-index: 0;
 }
