@@ -12,11 +12,14 @@ export default function Results({ SERVER_URL }) {
   let restaurantId;
 
   if (hasRestaurants) {
-    restaurantId = restaurants[0].id;
+    const sortedRestaurants = [...restaurants].sort(
+      (a, b) => b.rating - a.rating
+    );
+    restaurantId = sortedRestaurants[0].id;
   }
 
   const [restaurantDetails, setRestaurantDetails] = useState(null);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(null);
   const [loading, setLoading] = useState(true); // Add loading state variable
 
   useEffect(() => {
@@ -35,7 +38,7 @@ export default function Results({ SERVER_URL }) {
     Promise.all([fetchRestaurantDetails(), fetchReviews()]) // Use Promise.all to wait for both fetch calls to complete
       .then(() => setLoading(false))
       .catch((error) => console.error(error));
-  }, [SERVER_URL, restaurantId]);
+  }, [restaurantId]);
 
   const handleClick = () => {
     dispatch(resetRestaurants());
@@ -57,43 +60,50 @@ export default function Results({ SERVER_URL }) {
               src={restaurants[0].image_url}
               alt={restaurants[0].name}
             />
-            <h2>{restaurants[0].name}</h2>
-            <h3>Style:</h3>
-            <p>{restaurants[0].categories[0].title}</p>
-            <h3>Address:</h3>
-            <address>{restaurants[0].location.address1}</address>
-            <address>{restaurants[0].location.zip_code}</address>
-            <address>{restaurants[0].location.city}</address>
+            <div className="card-title">
+              <h2>{restaurants[0].name}</h2>
+              <p>{restaurants[0].categories[0].title}</p>
+            </div>
             {restaurantDetails && (
               <div className="card-footer">
-                <div>
+                <div className="footer-child">
                   <h3>Price:</h3>
                   <p>{restaurantDetails.price}</p>
                 </div>
-                <div>
+                <div className="footer-child">
                   <h3>Rating:</h3>
                   <p>{restaurantDetails.rating}/5</p>
                 </div>
               </div>
             )}
-            {reviews.length > 0 && (
-              <>
-                <h3>Reviews:</h3>
-                {reviews.map((review) => (
-                  <div key={review.id}>
-                    <p>{review.text}</p>
-                    <p>By: {review.user.name}</p>
-                    <p>Rating: {review.rating}</p>
-                  </div>
-                ))}
-              </>
-            )}
-            {restaurantDetails && restaurantDetails.display_phone && (
-              <>
-                <h3>Contact:</h3>
-                <address>{restaurantDetails.display_phone}</address>
-              </>
-            )}
+            <div className="card-footer">
+              <div className="footer-child">
+                {reviews.reviews.text && (
+                  <>
+                    <h3>Review:</h3>
+                    {reviews.reviews.map((review) => (
+                      <div className="quote" key={review.id}>
+                        <p>{review.text}</p>
+                        <p>By: {review.user.name}</p>
+                        <p>Rating: {review.rating}</p>
+                      </div>
+                    ))}
+                  </>
+                )}
+              </div>
+              <div className="footer-child">
+                <h3>Address:</h3>
+                <address>{restaurants[0].location.address1}</address>
+                <address>{restaurants[0].location.zip_code}</address>
+                <address>{restaurants[0].location.city}</address>
+                {restaurantDetails && restaurantDetails.display_phone && (
+                  <>
+                    <h3>Contact:</h3>
+                    <address>{restaurantDetails.display_phone}</address>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </>
       ) : (

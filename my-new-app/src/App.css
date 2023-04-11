@@ -220,10 +220,11 @@ input[type="range"]:focus::-ms-fill-upper {
 .restaurantCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 430px;
   margin: 20px;
-  padding: 20px;
+  padding: 15px;
   border: 1px solid var(--primary-color);
   background-color: #ff511711;
   border-radius: 10px;
@@ -232,9 +233,10 @@ input[type="range"]:focus::-ms-fill-upper {
 .card-footer {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
+  margin: 15px;
 }
 
 .house {
@@ -244,4 +246,35 @@ input[type="range"]:focus::-ms-fill-upper {
   font-size: 3rem;
   transform: translate(-25%, -60%);
   z-index: 0;
+}
+
+.quote {
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.quote::before {
+  content: open-quote;
+  font-size: 20px;
+}
+
+.quote::after {
+  content: close-quote;
+  font-size: 20px;
+}
+
+.footer-child {
+  width: 40%;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }

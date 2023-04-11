@@ -31,14 +31,14 @@ export default function NarrowByPricePage() {
   }
 
   function handleClick() {
-    if (!restaurants) {
-      navigate("/results");
-      return;
-    }
     setIsLoading(true);
     const filteredRestaurants = restaurants.filter((restaurant) => {
       return filterByPrice(restaurant.price);
     });
+    if (filteredRestaurants.length === 0) {
+      navigate("/results");
+      return;
+    }
     dispatch(setRestaurants(filteredRestaurants));
     setIsLoading(false);
     navigate("/narrow-by-category");
