@@ -13,26 +13,35 @@
   text-align: center;
 }
 
+#logo {
+  position: relative;
+}
+
 h1 {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 h2 {
-  margin-bottom: 0px;
+  margin: 5px;
 }
 
 h3 {
-  margin-bottom: 0px;
-  font-size: 1rem;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
   text-transform: uppercase;
 }
 
 address {
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
 p {
   margin: 0px;
+  font-size: 0.8rem;
+}
+
+.description-text {
+  font-size: 1.2rem;
 }
 
 .App-header {
@@ -52,7 +61,7 @@ button {
   color: var(--whites);
   padding: 15px 32px;
   font-size: 18px;
-  margin: 50px 2px;
+  margin: 20px 2px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
@@ -212,7 +221,7 @@ input[type="range"]:focus::-ms-fill-upper {
 }
 
 .restaurantImage {
-  width: 400px;
+  width: 350px;
   height: 200px;
   object-fit: cover;
 }
@@ -222,7 +231,7 @@ input[type="range"]:focus::-ms-fill-upper {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 430px;
+  width: 380px;
   margin: 20px;
   padding: 15px;
   border: 1px solid var(--primary-color);
@@ -236,7 +245,7 @@ input[type="range"]:focus::-ms-fill-upper {
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  margin: 15px;
+  margin: 5px;
 }
 
 .house {
@@ -257,18 +266,8 @@ input[type="range"]:focus::-ms-fill-upper {
   text-align: center;
 }
 
-.quote::before {
-  content: open-quote;
-  font-size: 20px;
-}
-
-.quote::after {
-  content: close-quote;
-  font-size: 20px;
-}
-
 .footer-child {
-  width: 40%;
+  width: 50%;
 }
 
 .card-title {

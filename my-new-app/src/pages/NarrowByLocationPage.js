@@ -14,32 +14,6 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!location) {
-      alert("Please allow location permission and try again.");
-      return;
-    }
-
-    setIsLoading(true); // set loading state to true
-
-    search(radius)
-      .then((hasResults) => {
-        setIsLoading(false); // set loading state back to false
-        if (!hasResults) {
-          alert("No results found");
-          return;
-        }
-        navigate("/narrow-by-price");
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false); // set loading state back to false
-        // Display an error message or handle specific errors differently
-      });
-  }
-
   async function search(radius) {
     try {
       const response = await axios.get(
@@ -50,6 +24,29 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
     } catch (error) {
       console.error(error);
       throw new Error("An error occurred while searching for restaurants.");
+    }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    try {
+      const hasResults = await search(radius);
+
+      setIsLoading(false);
+
+      if (!hasResults) {
+        alert("No results found");
+        return;
+      }
+
+      navigate("/narrow-by-price");
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+      // Display an error message or handle specific errors differently
     }
   }
 

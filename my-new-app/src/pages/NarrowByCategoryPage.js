@@ -44,7 +44,9 @@ export default function NarrowByCategoryPage() {
   return (
     <div>
       <div>
-        <p>Pick some keywords that makes your stomach go brrr.</p>
+        <p className="description-text">
+          Pick some keywords that makes your stomach go brrr.
+        </p>
         <div>
           <div className={"container"}>
             <ul className={"tag"}>

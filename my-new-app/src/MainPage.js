@@ -12,7 +12,9 @@ const SERVER_URL = "http://localhost:8080";
 export default function MainPage() {
   return (
     <main>
-      <h1>Find Your Food</h1>
+      <div id="logo">
+        <h1>Find Your Food</h1>
+      </div>
       <Provider store={store}>
         <BrowserRouter>
           <Routes>

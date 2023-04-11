@@ -26,12 +26,12 @@ export default function PriceInput({ onValueChange, DEFAULT_PRICE }) {
 
   return (
     <div>
-      <span style={{ marginBottom: "10px" }}>
+      <p className="description-text">
         On a scale of McDonald's to Michelin star, how fancy do you want to go?{" "}
-        <p>
-          <b>{getFancyLevelText(value)}</b>
-        </p>
-      </span>
+      </p>
+      <div style={{ marginTop: "50px" }}>
+        <b>{getFancyLevelText(value)}</b>
+      </div>
       <div>
         <input
           type="range"
