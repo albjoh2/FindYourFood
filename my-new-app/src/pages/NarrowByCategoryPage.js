@@ -15,6 +15,7 @@ export default function NarrowByCategoryPage() {
     new Set(restaurants.flatMap((r) => r.categories[0].title))
   );
 
+  //TODO - seems like some categorys are missing ex Josefs has both pub and scandinavian but only pub is shown
   const handleCategoryChange = (e) => {
     const category = e.target.value;
     setSelectedCategories((categories) =>
@@ -50,18 +51,23 @@ export default function NarrowByCategoryPage() {
         <div>
           <div className={"container"}>
             <ul className={"tag"}>
-              {categories.map((category) => (
-                <li key={category}>
-                  <input
-                    type="checkbox"
-                    id={category}
-                    value={category}
-                    onChange={handleCategoryChange}
-                    checked={selectedCategories.includes(category)}
-                  />
-                  <label htmlFor={category}>{category}</label>
-                </li>
-              ))}
+              {categories.map((category) => {
+                if (category === "Restaurants") {
+                  return null;
+                }
+                return (
+                  <li key={category}>
+                    <input
+                      type="checkbox"
+                      id={category}
+                      value={category}
+                      onChange={handleCategoryChange}
+                      checked={selectedCategories.includes(category)}
+                    />
+                    <label htmlFor={category}>{category}</label>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
