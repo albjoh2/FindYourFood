@@ -1,15 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import RadiusInput from "../components/RadiusInput";
-import LocationPermission from "../components/LocationPermission";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setRestaurants } from "../reducer";
 
-export default function NarrowByLocationPage({ SERVER_URL }) {
+export default function NarrowByLocationPage({ SERVER_URL, location }) {
   const DEFAULT_RADIUS = 20000;
   const navigate = useNavigate();
-  const [location, setLocation] = useState(null);
+
   const [radius, setRadius] = useState(DEFAULT_RADIUS);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -52,7 +51,6 @@ export default function NarrowByLocationPage({ SERVER_URL }) {
 
   return (
     <div>
-      <LocationPermission setLocation={setLocation} />
       <form onSubmit={handleSubmit}>
         <RadiusInput
           onValueChange={setRadius}

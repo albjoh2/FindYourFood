@@ -34,6 +34,10 @@ export default function NarrowByCategoryPage() {
   };
 
   const handleClick = () => {
+    if (selectedCategories.length === 0) {
+      alert("Please select at least one category");
+      return;
+    }
     const filteredRestaurants = filterRestaurantsByCategory(
       restaurants,
       selectedCategories

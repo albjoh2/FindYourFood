@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PriceInput from "../components/PriceInput";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setRestaurants, resetRestaurants } from "../reducer";
+import { setRestaurants } from "../reducer";
 
 export default function NarrowByPricePage() {
   const DEFAULT_PRICE = 2;
