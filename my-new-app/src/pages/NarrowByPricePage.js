@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PriceInput from "../components/PriceInput";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setRestaurants } from "../reducer";
+import { setRestaurants, resetRestaurants } from "../reducer";
 
 export default function NarrowByPricePage() {
   const DEFAULT_PRICE = 2;
@@ -19,15 +19,10 @@ export default function NarrowByPricePage() {
   }, [navigate, restaurants]);
 
   function filterByPrice(restaurantPrice) {
-    if (!restaurantPrice && parseInt(price) >= 3) {
+    if (!restaurantPrice && parseInt(price) > 1) {
       return false;
     }
-    return (
-      restaurantPrice &&
-      (restaurantPrice.length === parseInt(price) ||
-        restaurantPrice.length === parseInt(price) - 1 ||
-        restaurantPrice.length === parseInt(price) + 1)
-    );
+    return restaurantPrice && restaurantPrice.length === parseInt(price);
   }
 
   function handleClick() {
@@ -36,7 +31,8 @@ export default function NarrowByPricePage() {
       return filterByPrice(restaurant.price);
     });
     if (filteredRestaurants.length === 0) {
-      navigate("/results");
+      setIsLoading(false);
+      alert("No results at this price level. Please try again.");
       return;
     }
     dispatch(setRestaurants(filteredRestaurants));

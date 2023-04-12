@@ -152,7 +152,9 @@ export default function Results({ SERVER_URL }) {
           <p className="description-text" style={{ marginBottom: "10px" }}>
             No restaurant matched your requirements, please try again.{" "}
           </p>
-          <p>Protip: Make the search area bigger.</p>
+          <p>
+            <b>Protip:</b> Make the search area bigger or change the fancyness.
+          </p>
         </div>
       )}
       <button onClick={handleClick} type="submit">

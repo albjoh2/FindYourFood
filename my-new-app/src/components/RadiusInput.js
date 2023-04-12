@@ -26,7 +26,7 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
     >
       <p className="description-text" style={{ marginBottom: "10px" }}>
         You're not looking to go too far, right? How about we keep it within{" "}
-        <b>{value / 1000}</b> kilometers?
+        <span className="radius-display">{value / 1000}</span> kilometers?
       </p>
       <div
         style={{
