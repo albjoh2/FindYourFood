@@ -3,8 +3,13 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+}
+
 :root {
   --primary-color: #ff5117;
+  --primary-color-dark: #ee4107;
   --whites: #eee;
   --blacks: #121212;
 }
@@ -59,13 +64,24 @@ button {
   background-color: var(--primary-color);
   border: none;
   color: var(--whites);
-  padding: 15px 32px;
-  font-size: 18px;
+  padding: 16px 32px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
   margin: 20px 2px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  letter-spacing: 1px;
+  border-radius: 1px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: var(--primary-color-dark);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .container {
@@ -276,4 +292,18 @@ input[type="range"]:focus::-ms-fill-upper {
   margin: 0;
   padding: 0;
   text-align: center;
+}
+
+.click-and-drag {
+  position: absolute;
+  align-self: center;
+  width: 220px;
+  transform: translateX(180px) translateY(-75px);
+  rotate: 50deg;
+  opacity: 1;
+  transition: opacity 0.2s ease-out;
+}
+
+.click-and-drag.hidden {
+  opacity: 0;
 }

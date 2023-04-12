@@ -9,7 +9,7 @@ import { setRestaurants } from "../reducer";
 export default function NarrowByLocationPage({ SERVER_URL }) {
   const DEFAULT_RADIUS = 20000;
   const navigate = useNavigate();
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(null);
   const [radius, setRadius] = useState(DEFAULT_RADIUS);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();

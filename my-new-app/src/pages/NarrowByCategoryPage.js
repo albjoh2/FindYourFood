@@ -52,9 +52,6 @@ export default function NarrowByCategoryPage() {
           <div className={"container"}>
             <ul className={"tag"}>
               {categories.map((category) => {
-                if (category === "Restaurants") {
-                  return null;
-                }
                 return (
                   <li key={category}>
                     <input

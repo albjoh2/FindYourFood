@@ -6,11 +6,13 @@ function getCircleRadius(value) {
 
 export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
   const [value, setValue] = useState(DEFAULT_RADIUS);
+  const [imageVisible, setImageVisible] = useState(true);
 
   function handleChange(event) {
     const newValue = event.target.value;
     setValue(newValue);
     onValueChange(newValue); // pass the value to the onValueChange prop
+    setImageVisible(false); // hide the image
   }
 
   return (
@@ -55,6 +57,10 @@ export default function RadiusInput({ onValueChange, DEFAULT_RADIUS }) {
             r={getCircleRadius(value)}
           />
         </svg>
+        <img
+          className={`click-and-drag ${imageVisible ? "" : "hidden"}`}
+          src="ClickAndDrag.svg"
+        />
       </div>
     </div>
   );

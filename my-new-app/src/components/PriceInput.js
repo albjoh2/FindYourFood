@@ -12,13 +12,13 @@ export default function PriceInput({ onValueChange, DEFAULT_PRICE }) {
   function getFancyLevelText(value) {
     switch (value) {
       case 1:
-        return "Comfie, please!";
+        return "Comfie, please! 🌭";
       case 2:
-        return "Casual, please!";
+        return "Casual, please! 🍔";
       case 3:
-        return "Fancy, please!";
+        return "Fancy, please! 🥟";
       case 4:
-        return "Fine dining, please!";
+        return "Fine dining, please! 🦪";
       default:
         return "";
     }
